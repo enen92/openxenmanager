@@ -1065,7 +1065,7 @@ class oxcWindow(oxcWindowVM, oxcWindowHost, oxcWindowProperties,
                                     print "No VNC detected or VNC executable path does not exist"
 
                             else:
-                                Thread(target=self.tunnel.listen, args=(port,)).start()
+                                Thread(target=self.tunnel[self.selected_ref].listen, args=(port,)).start()
                                 time.sleep(1)
                                 # And open the connection
                                 # TODO: Add the capability to change this path in the options and save to config
@@ -1222,6 +1222,7 @@ class oxcWindow(oxcWindowVM, oxcWindowHost, oxcWindowProperties,
 
                     # Call to update_tab_host_nics to fill the host nics
                     self.update_tab_host_nics()
+                    
             elif tab_label == "HOST_Search":
                 if self.treeview.get_cursor()[1]:
                     self.xc_servers[host].halt_search = False
