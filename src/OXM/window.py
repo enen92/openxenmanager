@@ -218,7 +218,7 @@ class oxcWindow(oxcWindowVM, oxcWindowHost, oxcWindowProperties,
         self.tunnel = {}
         self.vnc_process = {} #used in osx
         self.vnc = {}
-        self.vnc_builders = {} #used to store vnc pgtk builders for the different windows in Linux
+        self.vnc_builders = {} #used to store vnc pygtk builders for the different windows in Linux
 
         """
         for i in range(0,7):
@@ -958,7 +958,6 @@ class oxcWindow(oxcWindowVM, oxcWindowHost, oxcWindowProperties,
                 # Disable the send ctrl-alt-del menu item
                 self.builder.get_object("menuitem_tools_cad").set_sensitive(False)
                 if hasattr(self, "vnc") and self.vnc and not self.noclosevnc and not eval(self.config["options"]["multiple_vnc"]):
-                    print "AQUIII!!!!!!!!!"
                     for key in self.vnc:
                         self.vnc[key].destroy()
                     self.builder.get_object("windowvncundock").hide()

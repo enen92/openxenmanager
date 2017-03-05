@@ -138,7 +138,6 @@ class oxcWindowVM(oxcWindowVMNetwork,oxcWindowVMStorage,oxcWindowVMSnapshot,oxcW
             self.vnc_builders[self.selected_ref].get_object("console_area3").add(self.vnc[self.selected_ref])
             self.vnc_builders[self.selected_ref].get_object("btredockconsole").connect("clicked", self.on_btredockconsole_clicked,self.selected_ref)
             self.vnc_builders[self.selected_ref].get_object("btredockconsole").connect("destroy", self.on_btredockconsole_clicked,self.selected_ref)
-            #TODO connect to ondestroy
             self.vnc_builders[self.selected_ref].get_object("windowvncundock").set_title(self.selected_name)
             self.vnc_builders[self.selected_ref].get_object("windowvncundock").show_all()
             
