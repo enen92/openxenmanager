@@ -1598,6 +1598,19 @@ class oxcWindow(oxcWindowVM, oxcWindowHost, oxcWindowProperties,
 
     def vnc_disconnected(self, info): 
         print "VNC disconnected..", info
+        #We need to find which one of the open vnc windows was disconnected in order to remove it from the stored dictionaries
+        disconnected_vnc = None
+        if self.vnc and eval(self.config["options"]["multiple_vnc"]):
+            for key in self.vnc:
+                if self.vnc[key] == info: disconnected_vnc = key; break
+            if disconnected_vnc:
+                if disconnected_vnc in self.vnc_builders:
+                    #This will hook to the destroy method so there is no need to remove the key from the dict
+                    #TODO handle the reboot in the window itself
+                    self.vnc_builders[disconnected_vnc].get_object("windowvncundock").destroy()
+
+                if disconnected_vnc in self.vnc.keys(): del self.vnc[disconnected_vnc]
+                if disconnected_vnc in self.tunnel.keys(): del self.tunnel[disconnected_vnc]
 
     def on_txttreefilter_changed(self, widget, data=None):
         """
